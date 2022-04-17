@@ -36,7 +36,9 @@ def gnocchiclient(request):
     LOG.debug('gnocchiclient connection created using token "%s" '
               'and endpoint "%s"' % (request.user.token.id, auth_endpoint))
 
-    return gnocchi_client.Client('1', session=sess)
+    region = request.user.services_region
+
+    return gnocchi_client.Client('1', session=sess, region_name=region)
 
 
 def metric_list(request):
